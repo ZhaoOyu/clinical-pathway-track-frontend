@@ -2,9 +2,9 @@
   <div class="monitor">
     <div class="headWapper">
       <div class="tra1">
-        <div class="notice">{{notice}}</div>
-        <div class="block">区块数:{{blockNumber}}</div>
-        <div class="node">交易数:{{nodeNumber}}</div>
+        <div class="notice">{{ notice }}</div>
+        <div class="block">区块数:{{ blockNumber }}</div>
+        <div class="node">交易数:{{ nodeNumber }}</div>
         <div class="honors">
           <div class="inner">
             <el-popover
@@ -12,53 +12,75 @@
               title="全国医疗质量管理案例优秀奖"
               width="300"
               trigger="hover"
-              style="marginTop:6px"
+              style="margintop: 6px"
             >
-              <div class="detail" style="display:flex">
+              <div class="detail" style="display: flex">
                 <div class="left">
-                  <div class="first bold" style="marginTop:5px">获得时间:</div>
-                  <div class="second bold" style="marginTop:10px">所做贡献:</div>
+                  <div class="first bold" style="margintop: 5px">获得时间:</div>
+                  <div class="second bold" style="margintop: 10px">
+                    所做贡献:
+                  </div>
                 </div>
                 <div class="right">
-                  <div class="first" style="marginTop:5px;marginLeft:4px">2018/04/18 - 2018/12/18</div>
-                  <div class="second" style="marginTop:10px;marginLeft:4px">慢性病就诊人数下降百分之26%</div>
+                  <div class="first" style="margintop: 5px; marginleft: 4px">
+                    2018/04/18 - 2018/12/18
+                  </div>
+                  <div class="second" style="margintop: 10px; marginleft: 4px">
+                    慢性病就诊人数下降百分之26%
+                  </div>
                 </div>
               </div>
               <svg class="icon" aria-hidden="true" slot="reference">
                 <use xlink:href="#icon-jiangbei-" />
               </svg>
             </el-popover>
-            <el-popover placement="top-start" title="全国医疗质量管理案例卓越奖" width="300" trigger="hover">
-              <div class="detail" style="display:flex">
+            <el-popover
+              placement="top-start"
+              title="全国医疗质量管理案例卓越奖"
+              width="300"
+              trigger="hover"
+            >
+              <div class="detail" style="display: flex">
                 <div class="left">
-                  <div class="first bold" style="marginTop:5px">获得时间:</div>
-                  <div class="second bold" style="marginTop:10px">所做贡献:</div>
+                  <div class="first bold" style="margintop: 5px">获得时间:</div>
+                  <div class="second bold" style="margintop: 10px">
+                    所做贡献:
+                  </div>
                 </div>
                 <div class="right">
-                  <div class="first" style="marginTop:5px;marginLeft:4px">2019/02/18 - 2019/11/18</div>
-                  <div class="second" style="marginTop:10px;marginLeft:4px">医护人员满意度达到96%</div>
+                  <div class="first" style="margintop: 5px; marginleft: 4px">
+                    2019/02/18 - 2019/11/18
+                  </div>
+                  <div class="second" style="margintop: 10px; marginleft: 4px">
+                    医护人员满意度达到96%
+                  </div>
                 </div>
               </div>
               <svg class="icon" aria-hidden="true" slot="reference">
                 <use xlink:href="#icon-jiangbei" />
               </svg>
             </el-popover>
-
             <el-popover
               placement="top-start"
               title="科室质量安全奖"
               width="300"
               trigger="hover"
-              style="marginTop:6px"
+              style="margintop: 6px"
             >
-              <div class="detail" style="display:flex">
+              <div class="detail" style="display: flex">
                 <div class="left">
-                  <div class="first bold" style="marginTop:5px">获得时间:</div>
-                  <div class="second bold" style="marginTop:10px">所做贡献:</div>
+                  <div class="first bold" style="margintop: 5px">获得时间:</div>
+                  <div class="second bold" style="margintop: 10px">
+                    所做贡献:
+                  </div>
                 </div>
                 <div class="right">
-                  <div class="first" style="marginTop:5px;marginLeft:4px">2020/04/09 - 2019/11/09</div>
-                  <div class="second" style="marginTop:10px;marginLeft:4px">没有发生明显的安全隐患</div>
+                  <div class="first" style="margintop: 5px; marginleft: 4px">
+                    2020/04/09 - 2019/11/09
+                  </div>
+                  <div class="second" style="margintop: 10px; marginleft: 4px">
+                    没有发生明显的安全隐患
+                  </div>
                 </div>
               </div>
               <svg class="icon" aria-hidden="true" slot="reference">
@@ -68,9 +90,10 @@
           </div>
         </div>
       </div>
+      <!-- head -->
       <div class="head" style="position: relative">
         <div class="title">智慧医疗平台</div>
-        <div class="sub-title">{{hospital}}</div>
+        <div class="sub-title">{{ hospital }}</div>
       </div>
       <div class="head1"></div>
     </div>
@@ -101,7 +124,12 @@
           ></Card>
         </div>
         <div class="nav-item">
-          <Card :number="guokao" word="国考分数" desc="The Score of Exam" iconClass="icon-yichang"></Card>
+          <Card
+            :number="guokao"
+            word="国考分数"
+            desc="The Score of Exam"
+            iconClass="icon-yichang"
+          ></Card>
         </div>
         <div class="nav-item">
           <Card
@@ -128,6 +156,10 @@
           ></Card>
         </div>
       </div>
+      <div class="test">
+        <Tab />
+      </div>
+      <!-- content -->
       <div class="center">
         <div class="left">
           <div class="earn">
@@ -139,7 +171,6 @@
           <div class="drgInfoShow">
             <infoShow></infoShow>
           </div>
-          
         </div>
         <div class="middle">
           <earlyWarning @clickDepartment="handleClickDepartment"></earlyWarning>
@@ -153,14 +184,12 @@
           </div>
         </div>
       </div>
-
-
-
+      <!-- footer -->
       <div class="bottom2">
         <div class="left">
           <img src="./1.png" />
         </div>
-      
+
         <div class="pinganguo">
           <jing-dou></jing-dou>
         </div>
@@ -174,26 +203,44 @@
 </template>
 
 <script>
-import Head from './component/Head.vue'
-import Card from './component/Card.vue'
-import Departments from './component/Departments.vue'
-import TotalSalary from './component/TotalSalary.vue'
-import Payment from './component/payment.vue'
-import Patient from './component/patient.vue'
-import Drg from './component/Drg.vue'
-import earlyWarning from './component/earlyWarning.vue'
-import earlyWarnings from './component/earlyWarnings.vue'
-import yuyueNumberComparison from './component/yuyueNumberComparison.vue'
-import hotSlow from './component/hotSlow.vue'
-import JingDou from './component/JingDou.vue'
-import GuoKao from './component/GuoKao.vue'
-import PingRank from './PingRank.vue'
-import infoShow from './component/infoShow.vue'
+import Head from "./component/Head.vue";
+import Card from "./component/Card.vue";
+import Departments from "./component/Departments.vue";
+import TotalSalary from "./component/TotalSalary.vue";
+import Payment from "./component/payment.vue";
+import Patient from "./component/patient.vue";
+import Drg from "./component/Drg.vue";
+import earlyWarning from "./component/earlyWarning.vue";
+import earlyWarnings from "./component/earlyWarnings.vue";
+import yuyueNumberComparison from "./component/yuyueNumberComparison.vue";
+import hotSlow from "./component/hotSlow.vue";
+import JingDou from "./component/JingDou.vue";
+import GuoKao from "./component/GuoKao.vue";
+import PingRank from "./PingRank.vue";
+import infoShow from "./component/infoShow.vue";
+import Tab from "./component/Tab.vue";
 
 export default {
-  components: { Head, Card, Departments, TotalSalary, Payment, Drg, earlyWarnings, yuyueNumberComparison, hotSlow, JingDou, earlyWarning, GuoKao, PingRank, infoShow, Patient },
+  components: {
+    Head,
+    Card,
+    Departments,
+    TotalSalary,
+    Payment,
+    Drg,
+    earlyWarnings,
+    yuyueNumberComparison,
+    hotSlow,
+    JingDou,
+    earlyWarning,
+    GuoKao,
+    PingRank,
+    infoShow,
+    Patient,
+    Tab,
+  },
 
-  data () {
+  data() {
     return {
       jingdouNumber: 1426,
       guokao: 37,
@@ -210,50 +257,46 @@ export default {
       hospital: "",
       blockNumber: 24600,
       nodeNumber: 486300,
-      notices: ["! 发热人数增多", "! 外科预警数量较多", '! 慢性病数量增多'],
-      notice: '! 发热人数增多'
-    }
+      notices: ["! 发热人数增多", "! 外科预警数量较多", "! 慢性病数量增多"],
+      notice: "! 发热人数增多",
+    };
   },
-  computed: {
-
-  },
-  mounted () {
+  computed: {},
+  mounted() {
     this.$notify.error({
-      title: '警告',
+      title: "警告",
       dangerouslyUseHTMLString: true,
 
       message: "存在 <span class='red'> 3</span> 条违规记录,点击查看",
-      offset: 100
+      offset: 100,
     });
     this.$nextTick(() => {
-      let el = document.querySelector('.el-notification')
-      el.addEventListener('click', () => {
+      let el = document.querySelector(".el-notification");
+      el.addEventListener("click", () => {
         this.$router.push({
           path: "/feixing",
-        })
-      })
-    })
-    const hospital = this.$route.query.hospital
-    this.hospital = hospital
-    let i = 1
+        });
+      });
+    });
+    const hospital = this.$route.query.hospital;
+    this.hospital = hospital;
+    let i = 1;
 
     setInterval(() => {
-      this.notice = this.notices[(i++) % 3]
+      this.notice = this.notices[i++ % 3];
       if (i % 2 === 0) {
-        this.doctorWord = "(门诊+住院)人数"
-        this.doctorNumber = "246+438"
-        this.patientWord = "(挂号+住院)人数"
-        this.patientsNumber = "365+138"
+        this.doctorWord = "(门诊+住院)人数";
+        this.doctorNumber = "246+438";
+        this.patientWord = "(挂号+住院)人数";
+        this.patientsNumber = "365+138";
       } else {
-        this.doctorWord = "医生在线人数"
-        this.doctorNumber = "584"
-        this.patientWord = "患者用户人数"
-        this.patientsNumber = "503"
+        this.doctorWord = "医生在线人数";
+        this.doctorNumber = "584";
+        this.patientWord = "患者用户人数";
+        this.patientsNumber = "503";
       }
-    }, 3000)
-    setInterval(() => {
-
-    }, 3000)
+    }, 3000);
+    setInterval(() => {}, 3000);
   },
   methods: {
     // handleMouseLeave (type) {
@@ -274,12 +317,12 @@ export default {
     //     this.patientsNumber = "365+138"
     //   }
     // },
-    handleClickDepartment (department) {
-      console.log('department', department);
-      this.$store.commit('changeDepartment', department)
-    }
-  }
-}
+    handleClickDepartment(department) {
+      console.log("department", department);
+      this.$store.commit("changeDepartment", department);
+    },
+  },
+};
 </script>
 <style scoped >
 /* /deep/ .el-card__body {
@@ -289,7 +332,6 @@ export default {
 ::v-deep .el-card__body {
   padding: 0;
 }
-
 </style>
 <style lang="scss" scoped>
 .monitor {
@@ -495,7 +537,6 @@ export default {
           height: 50%;
           width: 100%;
         }
-        
       }
       .middle {
         width: 40%;
@@ -542,6 +583,12 @@ export default {
     width: 30%;
     height: 100%;
   }
-  
+}
+.test {
+  width: auto;
+  height: auto;
+  background-color: #0e1623;
+  background-color: #081326;
+  //background-color: white;
 }
 </style>
