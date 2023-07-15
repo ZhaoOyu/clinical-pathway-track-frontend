@@ -33,14 +33,7 @@
 </template>
   
   <script>
-// import CostStructure from "./component/CostStructure.vue";
 export default {
-  // routes: [
-  //   {
-  //     path: "/",
-  //     component: CostStructure, // 默认展示的组件
-  //   },
-  // ],
   data() {
     return {
       menuItems: [
@@ -60,7 +53,7 @@ export default {
         },
         {
           id: 3,
-          label: "运行效率",
+          label: "运营效率",
           route: "/monitorPlatform/efficiency",
           iconName: "el-icon-data-analysis",
           isActive: false,
@@ -172,9 +165,9 @@ export default {
 .content {
   //height: 100vh;
   padding-top: 50px;
-  background-color: 081326;
+  background-color: #081326;
   flex: 1;
-  padding-left: 160px;
+  padding-left: 200px;
   padding-right: 30px;
 }
 .yuanZhang {

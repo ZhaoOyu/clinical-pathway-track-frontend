@@ -101,20 +101,20 @@ const routes = [
       {
         path:'dashboard',
         name:'dashboard',
-        component:()=>import('../components/MonitorPlatfrom/component/CostStructure.vue')
+        component:()=>import('../components/MonitorPlatfrom/component/Dashboard.vue')
       },
       {
         path:'quality',
         name:'quality',
-        component:()=>import('../components/MonitorPlatfrom/component/IncomeScale.vue')
+        component:()=>import('../components/MonitorPlatfrom/component/Quality.vue')
       },{
         path:'efficiency',
         name:'efficiency',
-        component:()=>import('../components/MonitorPlatfrom/component/IncomeStructure.vue')
+        component:()=>import('../components/MonitorPlatfrom/component/Efficiency.vue')
       },{
         path:'evaluation',
         name:'evaluation',
-        component:()=>import('../components/MonitorPlatfrom/component/PatientInfo.vue')
+        component:()=>import('../components/MonitorPlatfrom/component/Evaluation.vue')
       }
     ]
   },
