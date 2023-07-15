@@ -18,7 +18,15 @@ export default {
   watch: {
     $route: {
       handler: function (newV) {
-        if (newV.name === "yuanZhang" || newV.name === "login") {
+        if (
+          newV.name === "yuanZhang" ||
+          newV.name === "login" ||
+          newV.name === "monitorPlatform" ||
+          newV.name === "dashboard" ||
+          newV.name === "evaluation" ||
+          newV.name === "quality" ||
+          newV.name === "efficiency"
+        ) {
           this.yuanZhang = true;
         } else {
           this.yuanZhang = false;

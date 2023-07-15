@@ -1,6 +1,6 @@
 <template>
   <div class="charts-container">
-    <v-chart ref="chart" :options="options_1" style="height: 200px"></v-chart>
+    <v-chart ref="chart" :options="options_1"></v-chart>
     <v-chart ref="chart" :options="options_2"></v-chart>
     <v-chart ref="chart" :options="options_3"></v-chart>
   </div>
@@ -100,7 +100,7 @@ export default {
             type: "pie",
             selectedMode: "single",
             radius: [0, "20%"],
-            center: ["42%", "50%"],
+            center: ["50%", "50%"],
             label: {
               position: "inner",
             },
@@ -116,7 +116,7 @@ export default {
             name: "二级分类",
             type: "pie",
             radius: ["30%", "45%"],
-            center: ["42%", "50%"],
+            center: ["50%", "50%"],
             label: {
               formatter: "{b}:{c} ({d}%)",
               position: "inside",
@@ -130,7 +130,7 @@ export default {
             name: "三级分类",
             type: "pie",
             radius: ["55%", "70%"],
-            center: ["42%", "50%"],
+            center: ["50%", "50%"],
             label: {
               formatter: "{b}:{c} ({d}%)",
               position: "inside",

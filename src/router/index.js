@@ -91,7 +91,32 @@ const routes = [
   {
     path:"/yuanZhang",
     name:"yuanZhang", 
-    component:()=>import('../components/yuanZhang/YuanZhang.vue')
+    component:()=>import('../components/yuanZhang/YuanZhang.vue'),
+  },
+  {
+    path:'/monitorPlatform',
+    name:'monitorPlatform',
+    component:()=>import('../components/MonitorPlatfrom/MonitorPlatform.vue'),
+    children:[
+      {
+        path:'dashboard',
+        name:'dashboard',
+        component:()=>import('../components/MonitorPlatfrom/component/CostStructure.vue')
+      },
+      {
+        path:'quality',
+        name:'quality',
+        component:()=>import('../components/MonitorPlatfrom/component/IncomeScale.vue')
+      },{
+        path:'efficiency',
+        name:'efficiency',
+        component:()=>import('../components/MonitorPlatfrom/component/IncomeStructure.vue')
+      },{
+        path:'evaluation',
+        name:'evaluation',
+        component:()=>import('../components/MonitorPlatfrom/component/PatientInfo.vue')
+      }
+    ]
   },
   {
     path:"/dataError",
