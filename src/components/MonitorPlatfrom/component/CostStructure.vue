@@ -2,6 +2,15 @@
   <div class="charts-container">
     <v-chart :options="options_1"></v-chart>
     <v-chart :options="options_2"></v-chart>
+    <div class="d0"></div>
+    <div class="d0"></div>
+    <div class="d0"></div>
+    <div class="d0"></div>
+    <div class="d0"></div>
+    <div class="d0"></div>
+    <div class="d0"></div>
+    <div class="d0"></div>
+    <div class="d0"></div>
   </div>
 </template>
 
@@ -87,6 +96,12 @@ export default {
   height: 100%;
   margin: auto;
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
+}
+.d0 {
+  background-color: pink;
+  height: 200px;
+  width: 100px;
 }
 </style>

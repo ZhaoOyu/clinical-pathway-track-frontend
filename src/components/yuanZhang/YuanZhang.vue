@@ -156,8 +156,13 @@
           ></Card>
         </div>
       </div>
-      <div class="test">
-        <Tab />
+      <div class="monitor-platform">
+        <el-button
+          @click="$router.push('/monitorPlatform')"
+          type="primary"
+          round
+          >医疗质量监管平台</el-button
+        >
       </div>
       <!-- content -->
       <div class="center">
@@ -218,7 +223,6 @@ import JingDou from "./component/JingDou.vue";
 import GuoKao from "./component/GuoKao.vue";
 import PingRank from "./PingRank.vue";
 import infoShow from "./component/infoShow.vue";
-import Tab from "./component/Tab.vue";
 
 export default {
   components: {
@@ -237,7 +241,6 @@ export default {
     PingRank,
     infoShow,
     Patient,
-    Tab,
   },
 
   data() {
@@ -584,11 +587,11 @@ export default {
     height: 100%;
   }
 }
-.test {
-  width: auto;
-  height: auto;
-  background-color: #0e1623;
-  background-color: #081326;
-  //background-color: white;
+.monitor-platform {
+  cursor: default;
+  text-align: right;
+  position: absolute;
+  top: 80px;
+  right: 10px;
 }
 </style>
