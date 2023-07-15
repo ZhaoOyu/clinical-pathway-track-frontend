@@ -1,29 +1,16 @@
 <template>
-  <div class="charts-container">
-    <v-chart :options="options_1"></v-chart>
-    <v-chart :options="options_2"></v-chart>
-    <div class="d0"></div>
-    <div class="d0"></div>
-    <div class="d0"></div>
-    <div class="d0"></div>
-    <div class="d0"></div>
-    <div class="d0"></div>
-    <div class="d0"></div>
-    <div class="d0"></div>
-    <div class="d0"></div>
-  </div>
+  <div class="charts-container"></div>
 </template>
 
 <script>
 export default {
-  name: "CostStructure",
-  //成本结构
+  name: "Quality",
   data() {
     return {
       options_1: {
         // 饼图的配置选项
         title: {
-          text: "成本结构", // 标题文本
+          text: "医疗服务收入占比", // 标题文本
           textStyle: {
             fontSize: 20, // 标题字体大小
             fontWeight: "bold", // 标题字体粗细
@@ -39,10 +26,17 @@ export default {
             title: "c",
             center: ["50%", "50%"],
             data: [
-              { name: "人员费用", value: 50 },
-              { name: "管理费用", value: 10 },
-              { name: "其他费用", value: 40 },
+              { name: "医疗服务收入", value: 30 },
+              { name: "其他收入", value: 70 },
             ],
+            itemStyle: {
+              normal: {
+                color: function (params) {
+                  const colorList = ["#c23531", "#1E90FF"];
+                  return colorList[params.dataIndex];
+                },
+              },
+            },
             animationDuration: 2000,
             label: {
               // 标签配置
@@ -57,7 +51,7 @@ export default {
       options_2: {
         // 饼图的配置选项
         title: {
-          text: "无基本建设和设备购置非流动负债的公立医院占比", // 标题文本
+          text: "按病种付费比例", // 标题文本
           textStyle: {
             fontSize: 20, // 标题字体大小
             fontWeight: "bold", // 标题字体粗细
@@ -73,9 +67,17 @@ export default {
             title: "c",
             center: ["50%", "50%"],
             data: [
-              { name: "符合条件医院", value: 50 },
-              { name: "其他医院", value: 10 },
+              { name: "按病种付费", value: 60 },
+              { name: "其他付费方式", value: 30 },
             ],
+            itemStyle: {
+              normal: {
+                color: function (params) {
+                  const colorList = ["#c23531", "#1E90FF"];
+                  return colorList[params.dataIndex];
+                },
+              },
+            },
             animationDuration: 2000,
             label: {
               // 标签配置
@@ -96,12 +98,6 @@ export default {
   height: 100%;
   margin: auto;
   display: flex;
-  flex-direction: column;
   justify-content: space-around;
-}
-.d0 {
-  background-color: pink;
-  height: 200px;
-  width: 100px;
 }
 </style>
