@@ -10,7 +10,7 @@
     </div>
     <div class="yuanZhang">
       <el-button @click="$router.push('/yuanZhang')" type="primary" round
-        >院长大屏</el-button
+        >院长视角</el-button
       >
     </div>
     <div class="body">

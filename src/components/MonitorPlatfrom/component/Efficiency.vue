@@ -17,33 +17,33 @@
       <chart-template
         :options="chartOptions_3"
         title="医疗服务收入占比"
-        width="30%"
+        width="45%"
       />
       <!-- 按病种付费比例 -->
       <chart-template
         :options="chartOptions_4"
         title="按病种付费比例"
-        width="30%"
+        width="45%"
       />
       <!-- 成本结构 -->
-      <chart-template :options="chartOptions_5" title="成本结构" width="30%" />
+      <chart-template :options="chartOptions_5" title="成本结构" width="45%" />
       <!-- 无基本建设和设备购置非流动负债的公立医院占比 -->
       <chart-template
         :options="chartOptions_6"
         title="无基本建设和设备购置非流动负债的公立医院占比"
-        width="30%"
+        width="45%"
       />
       <!-- 门诊人次数与出院人次数比 -->
       <chart-template
         :options="chartOptions_7"
         title="门诊人次数与出院人次数比"
-        width="30%"
+        width="45%"
       />
       <!-- 三级环形图 -->
       <chart-template
         :options="chartOptions_8"
         title="三级环形图"
-        width="30%"
+        width="45%"
       />
     </div>
   </div>
@@ -140,10 +140,11 @@ export default {
             animationDuration: 1000,
             label: {
               // 标签配置
-              position: "outer", // 标签位置设为外部
-              alignTo: "labelLine", // 标签对齐线
               formatter: "{b}：{d}%", // 标签内容格式化，包含百分比和对应数据项值
               fontSize: "15",
+              position: "outer",
+              alignTo: "edge",
+              margin: 0,
             },
           },
         ],
@@ -171,10 +172,11 @@ export default {
             animationDuration: 2000,
             label: {
               // 标签配置
-              position: "outer", // 标签位置设为外部
-              alignTo: "labelLine", // 标签对齐线
               formatter: "{b}：{d}%", // 标签内容格式化，包含百分比和对应数据项值
               fontSize: "15",
+              position: "outer",
+              alignTo: "edge",
+              margin: 0,
             },
           },
         ],
@@ -195,10 +197,11 @@ export default {
             animationDuration: 2000,
             label: {
               // 标签配置
-              position: "outer", // 标签位置设为外部
-              alignTo: "labelLine", // 标签对齐线
               formatter: "{b}：{d}%", // 标签内容格式化，包含百分比和对应数据项值
               fontSize: "15",
+              position: "outer",
+              alignTo: "edge",
+              margin: 0,
             },
           },
         ],
@@ -218,10 +221,11 @@ export default {
             animationDuration: 2000,
             label: {
               // 标签配置
-              position: "outer", // 标签位置设为外部
-              alignTo: "labelLine", // 标签对齐线
               formatter: "{b}：{d}%", // 标签内容格式化，包含百分比和对应数据项值
               fontSize: "15",
+              position: "outer",
+              alignTo: "edge",
+              margin: 0,
             },
           },
         ],
@@ -334,23 +338,11 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
-.container {
-}
 .charts-container {
   /*height: auto;
   display: flex;
   margin: auto;*/
-  .d1 {
-    width: 50%;
-    background-color: #0e1d38;
-    overflow: hidden;
-    .title {
-      font-weight: bold;
-      background-color: #091629;
-      padding-left: 20px;
-      color: #117fbe;
-      font-size: 20px;
-    }
-  }
+  overflow-x: hidden; /* 隐藏水平滚动条 */
+  touch-action: pan-y; /* 禁用左右滑动操作 */
 }
 </style>
