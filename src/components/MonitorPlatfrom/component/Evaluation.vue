@@ -1,5 +1,12 @@
 <template>
-  <chart-template :options="chartOptions_1" title="满意度" width="45%" />
+  <div>
+    <chart-template :options="chartOptions_1" title="满意度" width="45%" />
+    <chart-template
+      :options="chartOptions_2"
+      title="满意度雷达图"
+      width="45%"
+    />
+  </div>
 </template>
 
 <script>
@@ -70,6 +77,37 @@ export default {
           },
         ],
       },
+      chartOptions_2: {
+        resize: true,
+        color: "yellow",
+        label: {
+          show: true,
+          formatter: "{c}",
+        },
+        radar: {
+          indicator: [
+            { name: "医疗服务", max: 10 },
+            { name: "就诊体验", max: 10 },
+            { name: "护理服务", max: 10 },
+            { name: "院内设施", max: 10 },
+            { name: "病友关系", max: 10 },
+            { name: "医疗费用", max: 10 },
+            { name: "医疗信息", max: 10 },
+          ],
+        },
+        series: [
+          {
+            name: "满意度评分",
+            type: "radar",
+            data: [
+              {
+                value: [8.5, 9.0, 8.0, 7.0, 7.5, 8.5, 9.5],
+                // name: "满意度评分",
+              },
+            ],
+          },
+        ],
+      },
     };
   },
 };
@@ -81,5 +119,9 @@ export default {
   /*margin: auto;*/
   display: flex;
   justify-content: space-between;
+}
+div {
+  overflow-x: hidden; /* 隐藏水平滚动条 */
+  touch-action: pan-y; /* 禁用左右滑动操作 */
 }
 </style>

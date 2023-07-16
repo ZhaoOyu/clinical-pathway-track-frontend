@@ -1,7 +1,7 @@
 <template>
   <div ref="chartContainer" class="chartContainer">
     <div class="title">{{ title }}</div>
-    <v-chart ref="chartRef" :options="options"></v-chart>
+    <v-chart style="zindex: 999" ref="chartRef" :options="options"></v-chart>
   </div>
 </template>
 
@@ -22,7 +22,6 @@ export default {
     adjustChartSize() {
       const chartContainer = this.$refs.chartContainer;
       const chartRef = this.$refs.chartRef;
-
       if (chartContainer && chartRef) {
         // 获取div容器的宽度和高度
         const containerWidth = chartContainer.offsetWidth;
@@ -31,7 +30,7 @@ export default {
         // 根据容器大小设置图表的宽度和高度
         chartRef.resize({
           width: containerWidth,
-          height: containerHeight,
+          height: containerHeight - 28,
         });
       }
     },
@@ -40,8 +39,10 @@ export default {
 </script>
 <style lang='scss' scoped>
 .chartContainer {
+  /*padding-bottom: 75%;*/
   background: 100%;
   margin-left: 20px;
+  margin-top: 20px;
   display: inline-block;
   background-color: #0e1d38;
   .title {
