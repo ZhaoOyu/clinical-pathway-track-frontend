@@ -4,7 +4,7 @@
     <chart-template
       :options="chartOptions_2"
       title="满意度雷达图"
-      width="45%"
+      width="50%"
     />
   </div>
 </template>
