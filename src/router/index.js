@@ -108,9 +108,9 @@ const routes = [
         name:'quality',
         component:()=>import('../components/MonitorPlatfrom/component/Quality.vue')
       },{
-        path:'efficiency',
-        name:'efficiency',
-        component:()=>import('../components/MonitorPlatfrom/component/Efficiency.vue')
+        path:'feedback',
+        name:'feedback',
+        component:()=>import('../components/MonitorPlatfrom/component/Feedback.vue')
       },{
         path:'evaluation',
         name:'evaluation',
