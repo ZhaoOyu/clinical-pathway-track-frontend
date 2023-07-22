@@ -591,7 +591,7 @@ export default {
   cursor: default;
   text-align: right;
   position: absolute;
-  top: 80px;
+  top: 50px;
   right: 10px;
 }
 </style>

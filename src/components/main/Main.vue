@@ -25,7 +25,7 @@ export default {
           newV.name === "dashboard" ||
           newV.name === "evaluation" ||
           newV.name === "quality" ||
-          newV.name === "efficiency"
+          newV.name === "feedback"
         ) {
           this.yuanZhang = true;
         } else {
