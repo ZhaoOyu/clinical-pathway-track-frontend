@@ -134,9 +134,9 @@ export default {
         },
       ],
       medicalServiceIndicators: [
-        { name: "门诊和住院患者数", value: 1200 },
-        { name: "住院平均住院日", value: 6.5 },
-        { name: "平均门诊等待时间", value: 20 },
+        { name: "门诊和住院患者数", value: "1200" },
+        { name: "住院平均住院日", value: "6.5天" },
+        { name: "平均门诊等待时间", value: "20分钟" },
         { name: "手术数量", value: 150 },
         { name: "手术成功率", value: "95%" },
       ],
