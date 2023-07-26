@@ -606,7 +606,7 @@ export default {
   cursor: default;
   text-align: right;
   position: absolute;
-  top: 80px;
+  top: 50px;
   left: 10px;
 }
 </style>
