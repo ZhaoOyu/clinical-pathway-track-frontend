@@ -98,6 +98,14 @@
       <div class="head1"></div>
     </div>
     <div class="wrapper">
+      <div class="operation-platform">
+        <el-button
+          @click="$router.push('/operationPlatform')"
+          type="primary"
+          round
+          >医疗运营管理平台</el-button
+        >
+      </div>
       <div class="navs">
         <div class="nav-item">
           <Card
@@ -593,5 +601,12 @@ export default {
   position: absolute;
   top: 80px;
   right: 10px;
+}
+.operation-platform {
+  cursor: default;
+  text-align: right;
+  position: absolute;
+  top: 80px;
+  left: 10px;
 }
 </style>
