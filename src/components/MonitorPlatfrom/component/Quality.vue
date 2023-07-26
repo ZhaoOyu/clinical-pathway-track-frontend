@@ -3,7 +3,7 @@
     <chart-template
       :options="chartOptions_1"
       title="医疗质量雷达图"
-      width="50%"
+      width="100%"
     />
   </div>
 </template>

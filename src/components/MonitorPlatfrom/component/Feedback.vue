@@ -22,11 +22,12 @@
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :page-sizes="[5, 10, 20, 30, 50]"
+      :page-sizes="[5, 10]"
       :page-size="pageSize"
       :total="feedbackList.length"
       layout="total, sizes, prev, pager, next, jumper"
-    ></el-pagination>
+    >
+    </el-pagination>
   </div>
 </template>
 

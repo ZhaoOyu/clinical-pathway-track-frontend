@@ -8,30 +8,69 @@
         <div class="score">{{ item.score }}</div>
       </div>
     </div>
-    <div class="list-box">
-      <chart-template :options="chartOptions_2" title="住院统计" width="30%" />
-      <div class="trans-list">
-        <div class="title">指标</div>
-        <div class="list">
-          <div class="list-title">
-            <div class="indicator">指标名称</div>
-            <div class="value">当前值</div>
-            <div class="reference">参考范围</div>
-            <div class="status">状态</div>
-          </div>
-          <div class="list-item" v-for="(item, index) in list" :key="index">
-            <div class="indicator">{{ item.indicator }}</div>
-            <div class="value">
-              {{ item.value }}
-            </div>
-            <div class="reference">
-              {{ item.reference }}
-            </div>
-            <div class="status">{{ item.status }}</div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <el-row>
+      <el-col :span="11">
+        <!-- <div class="indicator"> -->
+        <h2 class="list-title">{{ currentDate }}医疗服务指标</h2>
+        <el-table
+          :data="medicalServiceIndicators"
+          style="width: 100%"
+          :row-style="setRowStyle"
+          :header-row-style="setHeaderRowStyle"
+        >
+          <el-table-column prop="name" label="指标名称"></el-table-column>
+          <el-table-column prop="value" label="数值">
+            <template slot-scope="scope">
+              {{ scope.row.value }}
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-col>
+      <el-col :span="11" :offset="2">
+        <h2 class="list-title">全院综合指标得分</h2>
+        <el-table
+          :data="medicalQualityScores"
+          style="width: 100%"
+          :row-style="setRowStyle"
+          class="custom-table"
+        >
+          <el-table-column prop="name" label="指标名称"></el-table-column>
+          <el-table-column prop="value" label="得分">
+            <template slot-scope="scope">
+              {{ scope.row.value }}
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-col>
+      <el-col :span="11">
+        <h2 class="list-title">质量认证和评级情况</h2>
+        <el-table
+          :data="qualityCertifications"
+          style="width: 100%"
+          :row-style="setRowStyle"
+        >
+          <el-table-column prop="name" label="认证/评级名称"></el-table-column>
+          <el-table-column prop="level" label="级别"></el-table-column>
+          <el-table-column prop="date" label="认证/评级日期"></el-table-column>
+        </el-table>
+      </el-col>
+      <el-col :span="11" :offset="2">
+        <h2 class="list-title">患者安全指标</h2>
+        <el-table
+          :data="patientSafetyIndicator"
+          style="width: 100%"
+          :row-style="setRowStyle"
+        >
+          >
+          <el-table-column prop="name" label="指标名称"></el-table-column>
+          <el-table-column prop="value" label="得分">
+            <template slot-scope="scope">
+              {{ scope.row.value }}
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -42,6 +81,7 @@ export default {
   components: { ChartTemplate },
   data() {
     return {
+      currentDate: "",
       list: [
         {
           id: 1,
@@ -66,6 +106,19 @@ export default {
         },
         // 添加更多的指标数据
       ],
+      qualityCertifications: [
+        { name: "国家卫生认证", level: "三级甲等", date: "2022-06-15" },
+        { name: "国际JCI认证", level: "金标准", date: "2021-02-10" },
+        { name: "中国医院品质价值指数", level: "卓越", date: "2020-02-10" },
+        // 其他认证和评级信息...
+      ],
+      medicalQualityScores: [
+        { name: "治疗质量", value: "8.9" },
+        { name: "手术质量", value: "7.8" },
+        { name: "诊断质量", value: "8.4" },
+        { name: "医疗安全", value: "9.5" },
+        { name: "重返质量", value: "8.9" },
+      ],
       itemList: [
         {
           title: "综合医疗质量",
@@ -79,6 +132,18 @@ export default {
           score: 8.3,
           iconName: "el-icon-edit-outline",
         },
+      ],
+      medicalServiceIndicators: [
+        { name: "门诊和住院患者数", value: 1200 },
+        { name: "住院平均住院日", value: 6.5 },
+        { name: "平均门诊等待时间", value: 20 },
+        { name: "手术数量", value: 150 },
+        { name: "手术成功率", value: "95%" },
+      ],
+      patientSafetyIndicator: [
+        { name: "医院感染率", value: "2.5%" },
+        { name: "药物错误率", value: "0.2%" },
+        { name: "不良事件报告数", value: 3 },
       ],
       chartOptions_1: {
         tooltip: {},
@@ -148,6 +213,15 @@ export default {
     };
   },
   methods: {
+    setRowStyle({ row, rowIndex }) {
+      if (rowIndex % 2) {
+        return { backgroundColor: "#081326", color: "#00ffff" };
+      }
+      return { backgroundColor: "#081326", color: "#ffffff" };
+    },
+    setHeaderRowStyle({ row, rowIndex }) {
+      return { backgroundColor: "transparent", fontWeight: "bold" };
+    },
     getStatusClass(value, reference) {
       const [min, max] = reference.split(" - ");
       value = parseFloat(value);
@@ -166,6 +240,13 @@ export default {
         return "异常";
       }
     },
+  },
+  mounted() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+    this.currentDate = `${year}-${month}-${day}`;
   },
 };
 </script>
@@ -203,151 +284,8 @@ export default {
     color: aqua;
   }
 }
-.trans-list {
-  width: 30%;
-  background-color: #091629;
-  height: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  .title {
-    color: #117fbe;
-    font-size: 16px;
-    font-weight: bold;
-  }
-  .list {
-    background-color: #091629;
-    padding-left: 10px;
-    box-sizing: border-box;
-    height: 100%;
-    overflow: hidden;
 
-    color: rgb(255, 255, 255);
-    margin-top: 10px;
-    .title {
-      color: #168ce3 !important;
-      font-weight: 600;
-    }
-    .list-title {
-      display: flex;
-      border-bottom: 1px solid gray;
-      // height: 12.5%;
-      padding: 10px 20px 10px 0;
-      align-items: center;
-      div {
-        flex: 1;
-      }
-      .indicator {
-        color: #168ce3;
-        //flex: 1;
-        // height: 12.5%;
-
-        text-align: center;
-        font-size: 13px;
-      }
-      .value {
-        color: #168ce3;
-        //flex: 1;
-        // height: 12.5%;
-
-        text-align: center;
-        font-size: 13px;
-      }
-      .reference {
-        color: #168ce3;
-        //flex: 1;
-        // height: 12.5%;
-
-        text-align: center;
-        font-size: 13px;
-      }
-      .status {
-        color: #168ce3;
-        //flex: 1;
-        // height: 12.5%;
-
-        text-align: center;
-        font-size: 13px;
-      }
-
-      .dutyDirectorToday {
-        text-align: center;
-        color: #168ce3;
-
-        font-size: 13px;
-      }
-      .numberOfEmployeesToday {
-        text-align: center;
-        font-size: 13px;
-        color: #168ce3;
-      }
-      .overflow {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-      /* &:nth-child(odd) {
-        background: #f2f2f2;
-      }
-      &:nth-child(even) {
-        background: white;
-      } */
-      &.gray {
-        color: gray;
-      }
-    }
-    .list-item {
-      display: flex;
-      // border-bottom: 1px solid gray;
-      // height: 12.5%;
-      padding: 6px 20px 6px 0;
-      align-items: center;
-      div {
-        flex: 1;
-      }
-      .indicator {
-        color: #74fbf5;
-        // flex: 1;
-        // height: 12.5%;
-
-        text-align: center;
-        font-size: 10px;
-      }
-      .value {
-        color: #74fbf5;
-        //flex: 1;
-        // height: 12.5%;
-
-        text-align: center;
-        font-size: 10px;
-      }
-      .reference {
-        color: #74fbf5;
-        //flex: 1;
-        // height: 12.5%;
-
-        text-align: center;
-        font-size: 10px;
-      }
-      .status {
-        color: #74fbf5;
-        //flex: 1;
-        // height: 12.5%;
-
-        text-align: center;
-        font-size: 10px;
-      }
-
-      .numberOfEmployeesToday {
-        text-align: center;
-        font-size: 10px;
-        color: #74fbf5;
-      }
-    }
-  }
-}
-.list-box {
-  display: flex;
-  justify-content: space-between;
+.list-title {
+  color: #00ffff;
 }
 </style>
