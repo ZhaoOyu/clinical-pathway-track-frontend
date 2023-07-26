@@ -32,7 +32,8 @@ export default {
           newV.name === "incomeScale" ||
           newV.name === "patientInformation" ||
           newV.name === "Information" ||
-          newV.name === "CMI"
+          newV.name === "CMI" ||
+          newV.name === "feedback"
         ) {
           this.yuanZhang = true;
         } else {

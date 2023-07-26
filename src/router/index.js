@@ -141,17 +141,17 @@ const routes = [
         component: () => import('../components/MonitorPlatfrom/component/Dashboard.vue')
       },
       {
-        path: 'quality',
-        name: 'quality',
-        component: () => import('../components/MonitorPlatfrom/component/Quality.vue')
+        path:'quality',
+        name:'quality',
+        component:()=>import('../components/MonitorPlatfrom/component/Quality.vue')
       }, {
-        path: 'efficiency',
-        name: 'efficiency',
-        component: () => import('../components/MonitorPlatfrom/component/Efficiency.vue')
+        path:'feedback',
+        name:'feedback',
+        component:()=>import('../components/MonitorPlatfrom/component/Feedback.vue')
       }, {
-        path: 'evaluation',
-        name: 'evaluation',
-        component: () => import('../components/MonitorPlatfrom/component/Evaluation.vue')
+        path:'evaluation',
+        name:'evaluation',
+        component:()=>import('../components/MonitorPlatfrom/component/Evaluation.vue')
       }
     ]
   },

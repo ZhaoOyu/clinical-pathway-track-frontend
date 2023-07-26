@@ -4,8 +4,24 @@
     <chart-template
       :options="chartOptions_2"
       title="满意度雷达图"
-      width="45%"
+      width="50%"
     />
+    <h2 class="list-title">患者满意度调查结果</h2>
+    <el-table :data="currentPageData" border style="width: 100%">
+      <el-table-column prop="name" label="患者姓名"></el-table-column>
+      <el-table-column prop="age" label="年龄"></el-table-column>
+      <el-table-column prop="gender" label="性别"></el-table-column>
+      <el-table-column prop="satisfaction" label="满意度评分"></el-table-column>
+      <el-table-column prop="feedback" label="意见反馈"></el-table-column>
+    </el-table>
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :page-sizes="[5, 10]"
+      :page-size="pageSize"
+      :total="surveyResults.length"
+      layout="total, sizes, prev, pager, next, jumper"
+    ></el-pagination>
   </div>
 </template>
 
@@ -19,6 +35,8 @@ export default {
   },
   data() {
     return {
+      pageSize: 5,
+      currentPage: 1,
       chartOptions_1: {
         tooltip: {
           trigger: "axis",
@@ -108,7 +126,90 @@ export default {
           },
         ],
       },
+      surveyResults: [
+        {
+          name: "张三",
+          age: 30,
+          gender: "男",
+          satisfaction: 8,
+          feedback: "医生态度很好，诊断准确，非常满意！",
+        },
+        {
+          name: "李四",
+          age: 25,
+          gender: "女",
+          satisfaction: 6,
+          feedback: "等待时间稍长，但医护人员服务还不错。",
+        },
+        {
+          name: "王五",
+          age: 40,
+          gender: "男",
+          satisfaction: 10,
+          feedback: "非常满意，治疗效果很好，感谢医生和护士们。",
+        },
+        {
+          name: "张三",
+          age: 30,
+          gender: "男",
+          satisfaction: 8,
+          feedback: "医生态度很好，诊断准确，非常满意！",
+        },
+        {
+          name: "李四",
+          age: 25,
+          gender: "女",
+          satisfaction: 6,
+          feedback: "等待时间稍长，但医护人员服务还不错。",
+        },
+        {
+          name: "王五",
+          age: 40,
+          gender: "男",
+          satisfaction: 10,
+          feedback: "非常满意，治疗效果很好，感谢医生和护士们。",
+        },
+        {
+          name: "张三",
+          age: 30,
+          gender: "男",
+          satisfaction: 8,
+          feedback: "医生态度很好，诊断准确，非常满意！",
+        },
+        {
+          name: "李四",
+          age: 25,
+          gender: "女",
+          satisfaction: 6,
+          feedback: "等待时间稍长，但医护人员服务还不错。",
+        },
+        {
+          name: "王五",
+          age: 40,
+          gender: "男",
+          satisfaction: 10,
+          feedback: "非常满意，治疗效果很好，感谢医生和护士们。",
+        },
+      ],
     };
+  },
+  computed: {
+    // 根据当前页码和每页显示的记录数进行分页
+    currentPageData() {
+      const startIndex = (this.currentPage - 1) * this.pageSize;
+      const endIndex = startIndex + this.pageSize;
+      return this.surveyResults.slice(startIndex, endIndex);
+    },
+  },
+  methods: {
+    // 处理每页显示记录数改变事件
+    handleSizeChange(newSize) {
+      this.pageSize = newSize;
+    },
+    // 处理页码改变事件
+    handleCurrentChange(newPage) {
+      this.currentPage = newPage;
+    },
   },
 };
 </script>
@@ -123,5 +224,9 @@ export default {
 div {
   overflow-x: hidden; /* 隐藏水平滚动条 */
   touch-action: pan-y; /* 禁用左右滑动操作 */
+}
+
+.list-title {
+  color: #00ffff;
 }
 </style>
