@@ -25,6 +25,14 @@ export default {
           newV.name === "dashboard" ||
           newV.name === "evaluation" ||
           newV.name === "quality" ||
+          newV.name === "efficiency" ||
+          newV.name === "operationPlatform" ||
+          newV.name === "costStructure" ||
+          newV.name === "incomeStructure" ||
+          newV.name === "incomeScale" ||
+          newV.name === "patientInformation" ||
+          newV.name === "Information" ||
+          newV.name === "CMI" ||
           newV.name === "feedback"
         ) {
           this.yuanZhang = true;
