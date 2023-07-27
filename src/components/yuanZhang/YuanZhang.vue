@@ -223,6 +223,9 @@ import JingDou from "./component/JingDou.vue";
 import GuoKao from "./component/GuoKao.vue";
 import PingRank from "./PingRank.vue";
 import infoShow from "./component/infoShow.vue";
+import {getPresidentTotal,getPresidentGuokao,getPresidentDrgWarning,getPresidentDrgInfo,getPresidentDepartmentWarnings,getPresidentAppleRankDoctor,getPresidentAppleRankDepartment,getPresidentAppleNumber} from "./../../api/yuanZhang.js"
+import { getPatientInfo } from "@/api/drg-management";
+
 
 export default {
   components: {
@@ -245,6 +248,7 @@ export default {
 
   data() {
     return {
+      PresidentTotal:[],
       jingdouNumber: 1426,
       guokao: 37,
       drg: "120/-41",
@@ -265,6 +269,18 @@ export default {
     };
   },
   computed: {},
+  watch:{
+    PresidentTotal:{
+      handler(){
+        this.putPresidentTotal()
+      }
+    }
+  },
+  created() {
+    getPresidentTotal().then(res=>{
+      this.PresidentTotal = res
+    })
+  },
   mounted() {
     this.$notify.error({
       title: "警告",
@@ -289,14 +305,14 @@ export default {
       this.notice = this.notices[i++ % 3];
       if (i % 2 === 0) {
         this.doctorWord = "(门诊+住院)人数";
-        this.doctorNumber = "246+438";
+        this.doctorNumber = `${this.PresidentTotal[0].consultationNumber}+${this.PresidentTotal[0].hospitaliserNumber}`;
         this.patientWord = "(挂号+住院)人数";
-        this.patientsNumber = "365+138";
+        this.patientsNumber = `${this.PresidentTotal[0].registerNumber}+${this.PresidentTotal[0].hospitaliserNumber}`;
       } else {
         this.doctorWord = "医生在线人数";
-        this.doctorNumber = "584";
+        this.doctorNumber = `${this.PresidentTotal[0].doctorNumber}`;
         this.patientWord = "患者用户人数";
-        this.patientsNumber = "503";
+        this.patientsNumber = `${this.PresidentTotal[0].patientNumber}`;
       }
     }, 3000);
     setInterval(() => {}, 3000);
@@ -323,6 +339,16 @@ export default {
     handleClickDepartment(department) {
       console.log("department", department);
       this.$store.commit("changeDepartment", department);
+    },
+
+    putPresidentTotal(){
+      this.drg = `${this.PresidentTotal[0].drgIn}/${this.PresidentTotal[0].drgOut}`
+      this.abnormalNumber = this.PresidentTotal[0].abnormalNumber
+      this.jingdouNumber = this.PresidentTotal[0].appleNumber
+      this.guokao = this.PresidentTotal[0].examScore
+      this.doctorNumber = this.PresidentTotal[0].doctorNumber
+      this.totalPeopleNumber = this.PresidentTotal[0].totalNumber
+      this.patientsNumber = this.PresidentTotal[0].patientNumber
     },
   },
 };

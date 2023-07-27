@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import { getDailyCost } from "@/api/drg-management"
+import { getPresidentTotal, getPresidentGuokao, getPresidentDrgWarning, getPresidentDrgInfo, getPresidentDepartmentWarnings, getPresidentAppleRankDoctor, getPresidentAppleRankDepartment, getPresidentAppleNumber } from "./../../../api/yuanZhang.js"
 
 export default {
   computed: {
@@ -38,65 +40,9 @@ export default {
   },
   data () {
     return {
-      list: [
-        {
-          'department': '外科',
-          'earlyWarningMonthly': '23.8%',
-          'earlyWarningNumberToday': '324',
-          'timeUpdate': '2021-11-22  08:20:46',
-          'dutyDirectorToday': '李医生',
-          'numberOfEmployeesToday': '169'
-        },
-        {
-          'department': '妇科',
-          'earlyWarningMonthly': '21.6%',
-          'earlyWarningNumberToday': '103',
-          'timeUpdate': '2021-11-22  08:33:17',
-          'dutyDirectorToday': '张医生',
-          'numberOfEmployeesToday': '174'
-        },
-        {
-          'department': '口腔科',
-          'earlyWarningMonthly': '19.8%',
-          'earlyWarningNumberToday': '435',
-          'timeUpdate': '2021-11-22  09:01:31',
-          'dutyDirectorToday': '孙医生',
-          'numberOfEmployeesToday': '63'
-        },
-        {
-          'department': '内科',
-          'earlyWarningMonthly': '13.7%',
-          'earlyWarningNumberToday': '405',
-          'timeUpdate': '2021-11-22  09:14:43',
-          'dutyDirectorToday': '王医生',
-          'numberOfEmployeesToday': '43'
-        },
-        {
-          'department': '五官科',
-          'earlyWarningMonthly': '9.6%',
-          'earlyWarningNumberToday': '405',
-          'timeUpdate': '2021-11-22  10:14:43',
-          'dutyDirectorToday': '卢医生',
-          'numberOfEmployeesToday': '43'
-        },
-        {
-          'department': '脊柱科',
-          'earlyWarningMonthly': '9.0%',
-          'earlyWarningNumberToday': '405',
-          'timeUpdate': '2021-11-22  09:14:43',
-          'dutyDirectorToday': '钱医生',
-          'numberOfEmployeesToday': '133'
-        },
-        {
-          'department': '内分泌科',
-          'earlyWarningMonthly': '8.6%',
-          'earlyWarningNumberToday': '405',
-          'timeUpdate': '2021-11-22  09:14:43',
-          'dutyDirectorToday': '陈医生',
-          'numberOfEmployeesToday': '63'
-        },
-
-      ]
+      list: [],
+      PresidentDepartmentWarnings: [],
+      
     }
   },
   methods: {
@@ -107,8 +53,34 @@ export default {
           department: this.list[index].department
         }
       })
+    },
+    getList(){
+      for (let i = 0; i < this.PresidentDepartmentWarnings.length; i++) {
+        var obj = {
+          'department': this.PresidentDepartmentWarnings[i].department,
+          'earlyWarningMonthly': this.PresidentDepartmentWarnings[i].warningProportion,
+          'earlyWarningNumberToday': this.PresidentDepartmentWarnings[i].warningNumber,
+          'timeUpdate': this.PresidentDepartmentWarnings[i].time,
+          'dutyDirectorToday': this.PresidentDepartmentWarnings[i].doctorName,
+          'numberOfEmployeesToday': this.PresidentDepartmentWarnings[i].number
+        }
+
+        this.list.push(obj)
+      }
     }
-  }
+  },
+  watch:{
+    PresidentDepartmentWarnings:{
+      handler(){
+        this.getList()
+      }
+    }
+  },
+  created() {
+    getPresidentDepartmentWarnings().then(res => {
+      this.PresidentDepartmentWarnings = res
+    })
+  },
 }
 </script>
 <style lang="scss" scoped>
