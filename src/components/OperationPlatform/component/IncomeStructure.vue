@@ -1,27 +1,31 @@
-<template>
-  <div class="charts-container">
-    <v-chart :options="options_1"></v-chart>
-    <v-chart :options="options_2"></v-chart>
+<template >
+  <div class="container">
+    <div class="charts-container">
+      <!-- 医疗服务收入占比 -->
+      <chart-template
+        :options="chartOptions_1"
+        title="医疗服务收入占比"
+        width="45%"
+      />
+      <!-- 按病种付费比例 -->
+      <chart-template
+        :options="chartOptions_2"
+        title="按病种付费比例"
+        width="45%"
+      />
+    </div>
   </div>
 </template>
 
 <script>
+import ChartTemplate from "./ChartTemplate.vue";
 export default {
-  name: "IncomeStructure",
+  components: { ChartTemplate },
+  name: "Efficiency",
   data() {
     return {
-      options_1: {
+      chartOptions_1: {
         // 饼图的配置选项
-        title: {
-          text: "医疗服务收入占比", // 标题文本
-          textStyle: {
-            fontSize: 20, // 标题字体大小
-            fontWeight: "bold", // 标题字体粗细
-            color: "#ffffff",
-          },
-          left: "center", // 标题水平居中对齐
-          top: 20, // 标题距离容器顶部的距离
-        },
         series: [
           {
             type: "pie",
@@ -40,29 +44,20 @@ export default {
                 },
               },
             },
-            animationDuration: 2000,
+            animationDuration: 1000,
             label: {
               // 标签配置
-              position: "outer", // 标签位置设为外部
-              alignTo: "labelLine", // 标签对齐线
               formatter: "{b}：{d}%", // 标签内容格式化，包含百分比和对应数据项值
               fontSize: "15",
+              position: "outer",
+              alignTo: "edge",
+              margin: 0,
             },
           },
         ],
       },
-      options_2: {
+      chartOptions_2: {
         // 饼图的配置选项
-        title: {
-          text: "按病种付费比例", // 标题文本
-          textStyle: {
-            fontSize: 20, // 标题字体大小
-            fontWeight: "bold", // 标题字体粗细
-            color: "#ffffff",
-          },
-          left: "center", // 标题水平居中对齐
-          top: 20, // 标题距离容器顶部的距离
-        },
         series: [
           {
             type: "pie",
@@ -84,10 +79,11 @@ export default {
             animationDuration: 2000,
             label: {
               // 标签配置
-              position: "outer", // 标签位置设为外部
-              alignTo: "labelLine", // 标签对齐线
               formatter: "{b}：{d}%", // 标签内容格式化，包含百分比和对应数据项值
               fontSize: "15",
+              position: "outer",
+              alignTo: "edge",
+              margin: 0,
             },
           },
         ],
@@ -98,9 +94,10 @@ export default {
 </script>
 <style lang='scss' scoped>
 .charts-container {
-  height: 100%;
-  margin: auto;
+  /*height: auto;
   display: flex;
-  justify-content: space-around;
+  margin: auto;*/
+  overflow-x: hidden; /* 隐藏水平滚动条 */
+  touch-action: pan-y; /* 禁用左右滑动操作 */
 }
 </style>

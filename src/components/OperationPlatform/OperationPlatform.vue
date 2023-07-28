@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="top">
-      <div class="banner">医疗质量监管平台</div>
+      <div class="banner">医疗运营管理平台</div>
       <div class="header">
         <div class="d0 d1"></div>
         <div class="d0 d2"></div>
@@ -13,6 +13,7 @@
         >院长视角</el-button
       >
     </div>
+    ·
     <div class="body">
       <div class="sidebar">
         <div
@@ -39,37 +40,37 @@ export default {
       menuItems: [
         {
           id: 1,
-          label: "Dashboard",
-          route: "/monitorPlatform/dashboard",
-          iconName: "el-icon-odometer",
+          label: "患者数据",
+          route: "/operationPlatform/patientInformation/Information",
+          iconName: "el-icon-user",
           isActive: true,
         },
         {
           id: 2,
-          label: "医疗质量",
-          route: "/monitorPlatform/quality",
-          iconName: "el-icon-first-aid-kit",
+          label: "收入结构",
+          route: "/operationPlatform/incomeStructure",
+          iconName: "el-icon-pie-chart",
           isActive: false,
         },
         {
           id: 3,
-          label: "满意度",
-          route: "/monitorPlatform/evaluation",
-          iconName: "el-icon-edit-outline",
+          label: "收入规模",
+          route: "/operationPlatform/incomeScale",
+          iconName: "el-icon-data-line",
           isActive: false,
         },
         {
           id: 4,
-          label: "意见反馈",
-          route: "/monitorPlatform/feedback",
-          iconName: "el-icon-message",
+          label: "成本结构",
+          route: "/operationPlatform/costStructure",
+          iconName: "el-icon-s-data",
           isActive: false,
         },
       ],
     };
   },
   mounted() {
-    this.$router.push("/monitorPlatform/dashboard");
+    this.$router.push("/operationPlatform/patientInformation/information");
   },
   methods: {
     navigateTo(item) {
