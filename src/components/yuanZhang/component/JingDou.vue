@@ -4,33 +4,62 @@
  
 <script>
 import echarts from 'echarts'
+import { getPresidentTotal, getPresidentGuokao, getPresidentDrgWarning, getPresidentDrgInfo, getPresidentDepartmentWarnings, getPresidentAppleRankDoctor, getPresidentAppleRankDepartment, getPresidentAppleNumber } from "./../../../api/yuanZhang.js"
+import { getAdviceById } from '@/api/my-template'
 
 export default {
-  data () {
+  data() {
     return {
-      option: {}
+      option: {},
+      presidentAppleNumber: [],
+      login: [],
+      drg: [],
+      share: [],
+      deduct: [],
+      other: []
     }
   },
   computed: {
-    department () {
+    department() {
       return this.$store.state.yuanZhang.department
     },
-    yuanZhang () {
+    yuanZhang() {
       return this.$store.state.yuanZhang.jingdou
     }
   },
   watch: {
-    department () {
-      this.renderOptions(this.yuanZhang)
+    department() {
+      getPresidentAppleNumber(this.department).then(res => {
+        this.presidentAppleNumber = res
+      })
+
+
+    },
+    presidentAppleNumber: {
+      handler() {
+        this.getData()
+        this.renderOptions()
+        this.login = []
+        this.share = []
+        this.drg = []
+        this.deduct = []
+        this.other = []
+      }
     }
   },
-  mounted () {
+  created() {
+    getPresidentAppleNumber(this.department).then(res => {
+      this.presidentAppleNumber = res
+    })
+    this.getData()
+  },
+  mounted() {
 
-    this.renderOptions(this.yuanZhang)
+    this.renderOptions()
   },
   methods: {
-    renderOptions (data) {
-      console.log('data.denglu', data.denglu);
+    renderOptions() {
+      // console.log('data.denglu', data.denglu);
       this.option = {
         darkMode: true,
         color: ['#4992ff', '#fddd60', '#ff6e76', '#7cffb2', '#58d9f9', '#05c091', '#ff8a45', '#8d48e3', '#dd79ff'],
@@ -92,7 +121,7 @@ export default {
             emphasis: {
               focus: 'series'
             },
-            data: data.denglu
+            data: this.login
           },
 
           {
@@ -103,7 +132,7 @@ export default {
             emphasis: {
               focus: 'series'
             },
-            data: data.drg
+            data: this.drg
           },
           {
             name: '异常扣除',
@@ -113,7 +142,7 @@ export default {
             emphasis: {
               focus: 'series'
             },
-            data: data.kouchu
+            data: this.deduct
           },
           {
             name: '其他',
@@ -123,7 +152,7 @@ export default {
             emphasis: {
               focus: 'series'
             },
-            data: data.qita
+            data: this.other
           },
           {
             name: '文件共享',
@@ -137,13 +166,24 @@ export default {
             emphasis: {
               focus: 'series'
             },
-            data: data.gongxiang
+            data: this.share
           },
 
         ]
       };
       this.myChart = echarts.init(document.getElementById('main'), null);
       this.myChart.setOption(this.option)
+    },
+
+    getData() {
+      for (let i = 0; i < this.presidentAppleNumber.length; i++) {
+        this.login.push(this.presidentAppleNumber[i].login)
+        this.share.push(this.presidentAppleNumber[i].share)
+        this.deduct.push(this.presidentAppleNumber[i].deduct)
+        this.drg.push(this.presidentAppleNumber[i].drg)
+        this.other.push(this.presidentAppleNumber[i].other)
+
+      }
     }
   }
 }

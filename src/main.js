@@ -18,7 +18,6 @@ import VueECharts from 'vue-echarts'
 import 'echarts'
 // 引入 v-charts 插件
 import VCharts from 'v-charts'
-
 //------------------引入router和store模块---------------
 // 引入 store 下的 index.js 文件
 import store from './store/index'

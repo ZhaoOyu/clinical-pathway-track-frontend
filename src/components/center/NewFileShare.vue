@@ -4,33 +4,76 @@
  
 <script>
 import echarts from 'echarts'
-
+import { getDoctorFileShare } from "./../../api/center.js"
 export default {
-  data () {
+  data() {
     return {
-      option: {}
+      option: {},
+      doctorFileShare: [],
+      month: [],
+      upload: [],
+      download: [],
+      download_number: [],
+      monthTime: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"]
     }
   },
   computed: {
-    department () {
+    department() {
       return this.$store.state.yuanZhang.department
     },
-    yuanZhang () {
+    yuanZhang() {
       return this.$store.state.yuanZhang.jingdou
     }
   },
   watch: {
-    department () {
-      this.renderOptions(this.yuanZhang)
+    department() {
+      this.renderOptions()
+    },
+    doctorFileShare: {
+      handler() {
+        this.monthData()
+        this.uploadData()
+        this.downloadData()
+        this.downloadNumData()
+        this.renderOptions()
+      }
     }
   },
-  mounted () {
+  created() {
+    getDoctorFileShare("王医生").then(res => {
+      this.doctorFileShare = res
+    })
+
+  },
+  mounted() {
 
     this.renderOptions(this.yuanZhang)
   },
   methods: {
-    renderOptions (data) {
-      console.log('data.denglu', data.denglu);
+    //医生文件情况
+
+    monthData() {
+      for (let i = 0; i < this.doctorFileShare.length; i++) {
+        this.month.push(this.monthTime[this.doctorFileShare[i].time - 1])
+      }
+    },
+    uploadData() {
+      for (let i = 0; i < this.doctorFileShare.length; i++) {
+        this.upload.push(this.doctorFileShare[i].upload)
+      }
+    },
+    downloadData() {
+      for (let i = 0; i < this.doctorFileShare.length; i++) {
+        this.download.push(this.doctorFileShare[i].download)
+      }
+    },
+    downloadNumData() {
+      for (let i = 0; i < this.doctorFileShare.length; i++) {
+        this.download_number.push(this.doctorFileShare[i].downloadNumber)
+      }
+    },
+    renderOptions() {
+      console.log('data.denglu', this.doctorFileShare);
       this.option = {
         // darkMode: true,
         color: ['#4992ff', '#fddd60', '#ff6e76', '#7cffb2', '#58d9f9', '#05c091', '#ff8a45', '#8d48e3', '#dd79ff'],
@@ -72,7 +115,7 @@ export default {
           {
             type: 'category',
             boundaryGap: false,
-            data: ['六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
+            data: this.month
           }
         ],
         yAxis: [
@@ -89,7 +132,7 @@ export default {
             emphasis: {
               focus: 'series'
             },
-            data: data.denglu
+            data: this.upload
           },
 
           {
@@ -100,7 +143,7 @@ export default {
             emphasis: {
               focus: 'series'
             },
-            data: data.drg
+            data: this.download
           },
           {
             name: '被下载量',
@@ -110,7 +153,7 @@ export default {
             emphasis: {
               focus: 'series'
             },
-            data: data.qita
+            data: this.download_number
           },
 
 

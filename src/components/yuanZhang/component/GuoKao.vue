@@ -1,6 +1,6 @@
 <template>
   <div class="guokao1">
-    <div class="title">{{department}}国考指标分数</div>
+    <div class="title">{{ department }}国考指标分数</div>
     <div class="chart" @click="handleClick">
       <v-chart :options="options"></v-chart>
     </div>
@@ -8,41 +8,69 @@
 </template>
  
 <script>
+import { getPresidentTotal, getPresidentGuokao, getPresidentDrgWarning, getPresidentDrgInfo, getPresidentDepartmentWarnings, getPresidentAppleRankDoctor, getPresidentAppleRankDepartment, getPresidentAppleNumber } from "./../../../api/yuanZhang.js"
+
 export default {
-  data () {
+  data() {
     return {
-      options: {}
+      options: {},
+      presidentGuokao: [],
+      quality: [],
+      satisfaction: [],
+      development: [],
+      efficiency: [],
+      year: [],
     }
   },
   computed: {
-    department () {
+    department() {
       return this.$store.state.yuanZhang.department
     },
-    yuanZhang () {
+    yuanZhang() {
       return this.$store.state.yuanZhang.guokao
     }
   },
   watch: {
-    department (department) {
-      this.renderOptions(this.yuanZhang)
+    department(department) {
+      getPresidentGuokao(department).then(res => {
+        this.presidentGuokao = res
+      })
+
+
+    },
+    presidentGuokao: {
+      handler() {
+        this.getData()
+        this.renderOptions()
+        this.quality = []
+        this.satisfaction = []
+        this.development = []
+        this.efficiency = []
+        this.year = []
+      }
     }
   },
-  mounted () {
-    this.renderOptions(this.yuanZhang)
+  created() {
+    getPresidentGuokao(this.department).then(res => {
+      this.presidentGuokao = res
+    })
+  },
+  mounted() {
+    this.renderOptions()
 
   },
   methods: {
-    handleClick () {
+    handleClick() {
       window.location.href = 'http://82.157.160.85:84/#/dashboard?hospital=医院A'
     },
-    renderOptions (data) {
+    renderOptions() {
       this.options = {
         color: ['#4992ff', '#7cffb2', '#fddd60', '#ff6e76', '#58d9f9', '#05c091', '#ff8a45', '#8d48e3', '#dd79ff'],
 
 
         angleAxis: {
           type: 'category',
-          data: ['2022', '2021', '2020', '2019', '2018', '2017', '2016']
+          data: this.year
         },
         textStyle: {
           color: 'white'
@@ -56,7 +84,7 @@ export default {
         series: [
           {
             type: 'bar',
-            data: data.zhiliang,
+            data: this.quality,
             coordinateSystem: 'polar',
 
             name: '医疗质量',
@@ -67,7 +95,7 @@ export default {
           },
           {
             type: 'bar',
-            data: data.manyidu,
+            data: this.satisfaction,
             coordinateSystem: 'polar',
             name: '满意度',
             stack: 'a',
@@ -77,7 +105,7 @@ export default {
           },
           {
             type: 'bar',
-            data: data.fazhan,
+            data: this.development,
             coordinateSystem: 'polar',
             name: '持续发展',
             stack: 'a',
@@ -87,7 +115,7 @@ export default {
           },
           {
             type: 'bar',
-            data: data.xiaolv,
+            data: this.efficiency,
             coordinateSystem: 'polar',
             name: '运营效率',
             stack: 'a',
@@ -109,6 +137,15 @@ export default {
         },
       };
 
+    },
+    getData() {
+      for (let i = 0; i < this.presidentGuokao.length; i++) {
+        this.quality.push(this.presidentGuokao[i].quality)
+        this.satisfaction.push(this.presidentGuokao[i].satisfaction)
+        this.development.push(this.presidentGuokao[i].development)
+        this.efficiency.push(this.presidentGuokao[i].efficiency)
+        this.year.push(this.presidentGuokao[i].year)
+      }
     }
   }
 }
@@ -127,6 +164,7 @@ export default {
     font-size: 16px;
     font-weight: bold;
   }
+
   .chart {
     width: 100%;
     height: 90%;
