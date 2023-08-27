@@ -51,7 +51,7 @@
         >
           <el-table-column prop="name" label="认证/评级名称"></el-table-column>
           <el-table-column prop="level" label="级别"></el-table-column>
-          <el-table-column prop="date" label="认证/评级日期"></el-table-column>
+          <el-table-column prop="time" label="认证/评级日期"></el-table-column>
         </el-table>
       </el-col>
       <el-col :span="11" :offset="2">
@@ -75,6 +75,13 @@
 </template>
 
 <script>
+import {
+  getSuperviseScore,
+  getSuperviseMedicalServiceIndicator,
+  getSuperviseIndicatorScore,
+  getSuperviseQualityCertification,
+  getSupervisePatientSafetyIndicator,
+} from "../../../api/monitorPlatform";
 import ChartTemplate from "./ChartTemplate.vue";
 export default {
   name: "Dashboard",
@@ -123,13 +130,13 @@ export default {
         {
           title: "综合医疗质量",
           Etitle: "Medical Quality Score",
-          score: 9.3,
+          score: 0,
           iconName: "el-icon-first-aid-kit",
         },
         {
           title: "综合满意度",
           Etitle: "Satisfaction Score",
-          score: 8.3,
+          score: 0,
           iconName: "el-icon-edit-outline",
         },
       ],
@@ -242,6 +249,33 @@ export default {
     },
   },
   mounted() {
+    getSuperviseScore().then((res) => {
+      this.itemList[0].score = res[0].qualityScore;
+      this.itemList[1].score = res[0].satisfactionScore;
+    });
+    getSuperviseMedicalServiceIndicator().then((res) => {
+      this.medicalServiceIndicators[0].value = res[0].patientNumber;
+      this.medicalServiceIndicators[1].value = res[0].averageDay + "天";
+      this.medicalServiceIndicators[2].value = res[0].waitingTime + "分钟";
+      this.medicalServiceIndicators[3].value = res[0].surgicalNumber;
+      this.medicalServiceIndicators[4].value = res[0].successRate + "%";
+    });
+    getSuperviseIndicatorScore().then((res) => {
+      const valuesArr = Object.values(res[0]);
+      this.medicalQualityScores[0].value = valuesArr[5];
+      this.medicalQualityScores[1].value = valuesArr[1];
+      this.medicalQualityScores[2].value = valuesArr[2];
+      this.medicalQualityScores[3].value = valuesArr[3];
+      this.medicalQualityScores[4].value = valuesArr[4];
+    });
+    getSuperviseQualityCertification().then((res) => {
+      this.qualityCertifications = res;
+    });
+    getSupervisePatientSafetyIndicator().then((res) => {
+      this.patientSafetyIndicator[0].value = res[0].infectionRate + "%";
+      this.patientSafetyIndicator[1].value = res[0].drugErrorRate + "%";
+      this.patientSafetyIndicator[2].value = res[0].eventNumber;
+    });
     const today = new Date();
     const year = today.getFullYear();
     const month = String(today.getMonth() + 1).padStart(2, "0");

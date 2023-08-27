@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { getSuperviseMedicalQuality } from "../../../api/monitorPlatform";
 import ChartTemplate from "./ChartTemplate.vue";
 
 export default {
@@ -18,35 +19,39 @@ export default {
   },
   data() {
     return {
-      chartOptions_1: {
+      chartOptions_1: {},
+    };
+  },
+  mounted() {
+    getSuperviseMedicalQuality().then((res) => {
+      const arr = res;
+      const indicator = [];
+      const value = [];
+      for (let i = 0; i < arr.length; i++) {
+        indicator.push({ name: arr[i].item, max: 10 });
+        value.push(arr[i].score);
+      }
+      const charts = {
         label: {
           show: true,
           formatter: "{c}",
         },
         radar: {
-          indicator: [
-            { name: "治疗成果", max: 10 },
-            { name: "医疗技术", max: 10 },
-            { name: "医护人员素质", max: 10 },
-            { name: "诊断准确性", max: 10 },
-            { name: "医疗安全", max: 10 },
-            { name: "住院环境", max: 10 },
-            { name: "医患沟通", max: 10 },
-            { name: "医疗费用", max: 10 },
-          ],
+          indicator: indicator,
         },
         series: [
           {
             type: "radar",
             data: [
               {
-                value: [8.5, 9.0, 8.0, 7.5, 8.5, 7.5, 8.0, 7.0],
+                value: value,
               },
             ],
           },
         ],
-      },
-    };
+      };
+      this.chartOptions_1 = charts;
+    });
   },
 };
 </script>

@@ -34,6 +34,10 @@ export default {
         });
       }
     },
+    // renderChart() {
+    //   const chartInstance = this.$refs.chartRef.chart;
+    //   chartInstance.setOption(this.options);
+    // },
   },
 };
 </script>

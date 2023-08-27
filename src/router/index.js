@@ -133,25 +133,25 @@ const routes = [
   {
     path: '/monitorPlatform',
     name: 'monitorPlatform',
-    component: () => import('../components/MonitorPlatfrom/MonitorPlatform.vue'),
+    component: () => import('../components/MonitorPlatform/MonitorPlatform.vue'),
     children: [
       {
         path: 'dashboard',
         name: 'dashboard',
-        component: () => import('../components/MonitorPlatfrom/component/Dashboard.vue')
+        component: () => import('../components/MonitorPlatform/component/Dashboard.vue')
       },
       {
         path:'quality',
         name:'quality',
-        component:()=>import('../components/MonitorPlatfrom/component/Quality.vue')
+        component:()=>import('../components/MonitorPlatform/component/Quality.vue')
       }, {
         path:'feedback',
         name:'feedback',
-        component:()=>import('../components/MonitorPlatfrom/component/Feedback.vue')
+        component:()=>import('../components/MonitorPlatform/component/Feedback.vue')
       }, {
         path:'evaluation',
         name:'evaluation',
-        component:()=>import('../components/MonitorPlatfrom/component/Evaluation.vue')
+        component:()=>import('../components/MonitorPlatform/component/Evaluation.vue')
       }
     ]
   },
